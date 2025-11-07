@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy: "この関連レコードが存在するため、削除できません"
+        blank: "を入力してください"
+        too_short: "は %{count} 文字以上にしてください"
+        too_long: "は %{count} 文字以内にしてください"
+        taken: "はすでに存在します"
+        invalid: "は不正な値です"
+        confirmation: "と一致しません"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード"
+        github_url: "GitHub URL"
+        introduction: "自己紹介"
+        devjourney_id: "DevJourney ID"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      not_saved: "保存に失敗しました（%{count}件のエラーがあります）"
+  activemodel:
+    errors:
+      messages:
+        record_invalid: "無効なレコードです: %{errors}"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+        github_url: "GitHub URL"
+        introduction: "自己紹介"
+        devjourney_id: "DevJourney ID"
+  helpers:
+    submit:
+      create: "%{model}を作成する"
+      update: "%{model}を更新する"

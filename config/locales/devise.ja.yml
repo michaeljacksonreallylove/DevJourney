@@ -1,0 +1,28 @@
+ja:
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      signed_up_but_unconfirmed: "登録は完了しましたが、確認が必要です。"
+    passwords:
+      send_instructions: "パスワード再設定の案内を送信しました。"
+    confirmations:
+      send_instructions: "確認メールを送信しました。"
+    failure:
+      unauthenticated: "ログインしてください。"
+      invalid: "認証に失敗しました。"
+      already_authenticated: "すでにログイン中です。"
+      user:
+        already_authenticated: "すでにログイン中です。"
+    mailer:
+      confirmation_instructions:
+        subject: "アカウント確認について"
+      reset_password_instructions:
+        subject: "パスワード再設定の案内"
+    omniauth_callbacks:
+      failure: "認証に失敗しました。"
+    errors:
+      messages:
+        already_authenticated: "すでにログイン中です。"

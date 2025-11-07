@@ -1,0 +1,63 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="text-center">
+      <div class="logo-circle">
+        <i class="bi bi-code-slash"></i>
+      </div>
+      <h1 class="login-title">ログイン</h1>
+      <p class="login-subtitle">学習の旅を続けましょう</p>
+    </div>
+
+    
+    <div class="card">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: false } }) do |f| %>
+        <div id="loginForm">
+          <div class="mb-4">
+            <%= f.label :email, class: "form-label" %>
+            <div class="input-group">
+              <i class="bi bi-envelope input-icon"></i>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "your@email.com" %>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :password, class: "form-label" %>
+            <div class="input-group">
+              <i class="bi bi-lock input-icon"></i>
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "••••••••" %>
+            </div>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="mb-4">
+              <div class="form-check">
+                <%= f.check_box :remember_me, class: "form-check-input", id: "remember" %>
+                <%= f.label :remember_me, class: "form-check-label", for: "remember" %>
+              </div>
+            </div>
+          <% end %>
+
+          <%= f.submit "ログイン", class: "btn btn-login w-100 mb-4" %>
+
+          <div class="text-center">
+            <a href="<%= new_registration_path(resource_name) %>" class="link-primary d-block mb-2">
+              初めての方はこちら (新規登録)
+            </a>
+            <!-- <a href="<%= new_password_path(resource_name) %>" class="link-secondary d-block">
+              パスワードを忘れた場合
+            </a> -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="code-snippet">
+      <div class="code-dots">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+      </div>
+      <pre><span class="code-keyword">const </span><span class="code-value">journey = </span><span class="code-string">"始まったばかり"</span><span class="code-value">;</span></pre>
+    </div>
+  </div>
+</div>

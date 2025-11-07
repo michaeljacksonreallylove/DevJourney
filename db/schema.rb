@@ -15,16 +15,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_142949) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false, comment: "ユーザー名"
-    t.string "email", null: false, comment: "メールアドレス"
-    t.string "password_digest", null: false, comment: "パスワード"
+    t.string "email", default: "", null: false, comment: "メールアドレス"
+    t.string "devjourney_id", null: false, comment: "DevJourney アカウントID"
+    t.string "encrypted_password", default: "", null: false, comment: "パスワード"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "name", comment: "ユーザー名"
     t.text "introduction", comment: "自己紹介"
     t.string "github_url", comment: "GitHub URL"
-    t.integer "sign_in_count", default: 0, null: false, comment: "サインイン回数"
-    t.datetime "last_sign_in_at", comment: "最終サインイン日時"
     t.boolean "is_deleted", default: false, null: false, comment: "削除フラグ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["devjourney_id"], name: "index_users_on_devjourney_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 end

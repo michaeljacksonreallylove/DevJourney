@@ -20,8 +20,16 @@ module Devjourney
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
-    #
+
+    # タイムゾーンをJSTに変更
     config.time_zone = "Tokyo"
+
+    # DB保存時のタイムゾーンをJSTに変更
+    config.active_record.default_timezone = :local
+    
+    config.i18n.available_locales = %i[en ja]
+    config.i18n.default_locale = :ja
+    
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
