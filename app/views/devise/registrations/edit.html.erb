@@ -26,14 +26,13 @@
   <div class="field">
     <%= f.label :avatar %><br />
 
-    <!-- Preview (shows existing avatar if present, otherwise blank) -->
     <% if resource.avatar.present? %>
       <%= image_tag resource.avatar.url, id: 'avatar_preview', class: 'avatar-preview', alt: 'avatar preview', data: { has: true }, tabindex: 0 %>
     <% else %>
-      <img id="avatar_preview" class="avatar-preview" alt="avatar preview" src="" data-has="false" style="display:none;" tabindex="0" />
+      <%= image_tag 'avatars/default_avatar.svg', id: 'avatar_preview', class: 'avatar-preview', alt: 'avatar preview', data: { has: true }, tabindex: 0 %>
     <% end %>
 
-  <%= f.file_field :avatar, class: "form-control", id: 'avatar_input', accept: 'image/*', style: 'display:none;' %>
+    <%= f.file_field :avatar, class: "form-control", id: 'avatar_input', accept: 'image/*', style: 'display:none;' %>
   </div>
 
   <div class="actions">
