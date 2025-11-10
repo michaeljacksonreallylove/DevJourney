@@ -78,7 +78,7 @@ yarn install
 3. データベース作成・マイグレート
 
 ```bash
-bin/rails db:create db:migrate db:seed
+bin/rails db:create db:migrate 
 ```
 
 4. サーバ起動
