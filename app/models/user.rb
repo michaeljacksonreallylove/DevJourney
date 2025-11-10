@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,4 +17,14 @@ class User < ApplicationRecord
             presence: { on: :create },
             length: { maximum: 30 },
             uniqueness: { case_sensitive: false }
+
+  scope :valid, -> { where(is_deleted: false) }
+
+  def member_id
+    (id * 413).to_s[1, 2] + ((17_674_114 + id) * 3).to_s + (id * 794).to_s[1, 2]
+  end
+
+  def profile_page_uri
+    "/member/profile/#{member_id}"
+  end
 end

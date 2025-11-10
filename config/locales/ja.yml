@@ -19,6 +19,7 @@ ja:
         github_url: "GitHub URL"
         introduction: "自己紹介"
         devjourney_id: "DevJourney ID"
+        avatar: "プロフィール画像"
   errors:
     format: "%{attribute} %{message}"
     messages:

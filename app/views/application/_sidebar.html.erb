@@ -15,7 +15,7 @@
     </a>
 
     <% if user_signed_in? %>
-      <a href="<%= edit_user_registration_path %>" class="nav-link <%= 'active' if current_page?(edit_user_registration_path) %>">
+      <a href=<%= current_user.profile_page_uri %> class="nav-link <%= 'active' if current_page?(current_user.profile_page_uri) %>">
         <i class="bi bi-person"></i>
         <span>プロフィール</span>
       </a>

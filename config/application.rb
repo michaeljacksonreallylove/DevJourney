@@ -26,10 +26,10 @@ module Devjourney
 
     # DB保存時のタイムゾーンをJSTに変更
     config.active_record.default_timezone = :local
-    
+
     config.i18n.available_locales = %i[en ja]
     config.i18n.default_locale = :ja
-    
+
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

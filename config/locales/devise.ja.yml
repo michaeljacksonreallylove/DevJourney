@@ -6,10 +6,16 @@ ja:
     registrations:
       signed_up: "アカウント登録が完了しました。"
       signed_up_but_unconfirmed: "登録は完了しましたが、確認が必要です。"
+      updated: "アカウント情報が更新されました。"
+      updated_but_unconfirmed: "メールアドレスは変更されましたが、確認が必要です。確認メールを送信しました。"
+      user:
+        updated: "アカウント情報が更新されました。"
+        updated_but_unconfirmed: "メールアドレスは変更されましたが、確認が必要です。確認メールを送信しました。"
     passwords:
       send_instructions: "パスワード再設定の案内を送信しました。"
     confirmations:
       send_instructions: "確認メールを送信しました。"
+      confirmed: "アカウントが確認されました。"
     failure:
       unauthenticated: "ログインしてください。"
       invalid: "認証に失敗しました。"

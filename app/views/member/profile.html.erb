@@ -1,0 +1,6 @@
+プロフィール画面
+
+<%= @user.name %>
+
+<%= image_tag @user.avatar.url, alt: "プロフィール画像" if @user.avatar.present? %>
+<a href="<%= edit_user_registration_path %>">プロフィールを編集</a>
