@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         super
       end
     end
-    
+
     def after_update_path_for(resource)
       resource.profile_page_uri
     end
