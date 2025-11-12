@@ -20,8 +20,10 @@ ja:
       unauthenticated: "ログインしてください。"
       invalid: "認証に失敗しました。"
       already_authenticated: "すでにログイン中です。"
+      timeout: "セッションの有効期限が切れました。再度ログインしてください。"
       user:
         already_authenticated: "すでにログイン中です。"
+        timeout: "セッションの有効期限が切れました。再度ログインしてください。"
     mailer:
       confirmation_instructions:
         subject: "アカウント確認について"
