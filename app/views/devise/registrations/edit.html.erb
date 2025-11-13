@@ -1,40 +1,60 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-9">
+      <div id="profile-page" class="page-content active">
+        <div class="profile-container">
+          <h1 class="profile-title">プロフィール編集</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="mb-5">
+              <%= image_tag resource.avatar.url, id: 'avatar_preview', class: 'avatar-preview', alt: ' アバター画像' %>
+              <%= f.file_field :avatar, id: 'avatar_input', class: "form-control", accept: 'image/*', style: 'display:none;' %> 
+            </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, class: "form-control" %>
+            <div class="mb-4">
+              <%= f.label :name, class: "form-label" %><br />
+              <%= f.text_field :name, class: "form-control", placeholder: "名前を入力してください" %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :introduction, class: "form-label" %>
+              <%= f.text_area :introduction, class: "form-control", placeholder: "簡単な自己紹介文を入力してください", rows: 6 %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :github_url, class: "form-label" %>
+              <%= f.url_field :github_url, class: "form-control", placeholder: "https://github.com/yourusername" %>
+            </div>
+
+            <div class="mb-2">
+              <%= f.label :devjourney_id, class: "form-label" %>
+              <% if resource && resource.errors[:devjourney_id].present? %>
+                <div class="field-error">
+                  <% resource.errors.full_messages_for(:devjourney_id).each do |msg| %>
+                    <div class="field-error-item"><%= msg %></div>
+                  <% end %>
+                </div>
+              <% end %>
+              <%= f.text_field :devjourney_id, class: "form-control", placeholder: "devjourney_yourname" %>
+            </div>
+            <div class="form-text">他のユーザーと重複してはいけません。</div>
+            </div>
+
+            <div class="row g-3 mt-4">
+              <div class="col-6">
+                <%= link_to "戻る", current_user.profile_page_uri, class: "btn btn-back w-100" %>
+              </div>
+              <div class="col-6">
+                <%= f.submit "更新", class: "btn btn-submit w-100" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction, rows: 4, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :github_url %><br />
-    <%= f.url_field :github_url, class: "form-control", placeholder: "https://github.com/yourname" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :devjourney_id %><br />
-    <%= f.text_field :devjourney_id, autocomplete: "username", class: "form-control", placeholder: "devjourney_yourname" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :avatar %><br />
-    <%= image_tag resource.avatar.url, id: 'avatar_preview', class: 'avatar-preview', alt: ' アバター画像' %>
-    <%= f.file_field :avatar, id: 'avatar_input', class: "form-control", accept: 'image/*', style: 'display:none;' %> 
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<%= link_to "Back", :back %>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
