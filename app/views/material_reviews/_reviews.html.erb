@@ -1,0 +1,5 @@
+<%= material_review.title %>
+<p><%= material_review.description %></p>
+<p>Score: <%= material_review.score %>/5</p>
+<p>URL: <a href="<%= material_review.material_url %>"><%= material_review.material_url %></a></p>
+<a href="<%= material_review.user.profile_page_uri %>">@<%= material_review.user.devjourney_id %></a>

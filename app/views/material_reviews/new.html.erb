@@ -1,0 +1,33 @@
+<%= render "shared/error_messages", object: @material_review %>
+
+<%= form_with model: @material_review, local: true do |f| %>
+  <div>
+    <%= f.label "タイトル" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <% (1..5).each do |n| %>
+      <label id="star-<%= n %>" style="cursor: pointer;">
+        <%= f.radio_button :score, n, style: 'display: none;' %>
+        <span class="text-fz-30px" style="color: <%= (n <= @score.to_i) ? '#ffd700' : '#ccc' %>;">★</span> 
+      </label>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label "レビュー内容" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label "教材URL" %>
+    <%= f.url_field :material_url %>
+  </div>
+
+  <div>
+    <%= f.submit "レビューを投稿" %>
+  </div>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+<% end %>

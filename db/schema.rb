@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_09_064918) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_14_080550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "material_reviews", force: :cascade do |t|
+    t.integer "user_id", null: false, comment: "ユーザーID"
+    t.string "title", null: false, comment: "レビュータイトル"
+    t.text "material_url", comment: "教材URL"
+    t.integer "score", null: false, comment: "評価スコア(1~5段階)"
+    t.text "description", null: false, comment: "レビュー内容"
+    t.boolean "is_deleted", default: false, null: false, comment: "削除フラグ"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false, comment: "メールアドレス"

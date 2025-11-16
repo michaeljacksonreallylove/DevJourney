@@ -35,5 +35,10 @@
         <span>新規登録</span>
       </a>
     <% end %>
+
+    <a href="<%= material_reviews_path %>" class="nav-link <%= 'active' if current_page?(material_reviews_path) %>">
+        <i class="bi bi-file-earmark-text"></i>
+        <span>おすすめ教材投稿</span>
+      </a>
   </nav>
 </aside>

@@ -1,0 +1,2 @@
+module MaterialReviewsHelper
+end

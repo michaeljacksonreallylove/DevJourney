@@ -1,0 +1,5 @@
+<%= render partial: "reviews", collection: @material_reviews, as: :material_review %>
+
+<% if user_signed_in? %>
+  <a href="<%= new_material_review_path %>">新規教材投稿</a>
+<% end %>
