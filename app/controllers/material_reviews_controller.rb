@@ -16,6 +16,7 @@ class MaterialReviewsController < ApplicationController
 
     @material_review = MaterialReview.new(material_review_params)
     return render template: "errors/render_404", layout: false, status: :not_found unless @material_review.user_id == current_user.id
+    @score = material_review_params[:score].to_i
 
     if @material_review.save
       flash[:notice] = "レビューを投稿しました！"

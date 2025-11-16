@@ -56,34 +56,34 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const avatarInput = document.getElementById('avatar_input');
-  const avatarPreview = document.getElementById('avatar_preview');
-  if (!avatarInput || !avatarPreview) return; // ガード節
+  document.addEventListener('DOMContentLoaded', () => {
+    const avatarInput = document.getElementById('avatar_input');
+    const avatarPreview = document.getElementById('avatar_preview');
+    if (!avatarInput || !avatarPreview) return; // ガード節
 
-  let lastObjectUrl = null;
+    let lastObjectUrl = null;
 
-  // ファイル選択時はObject URLを作ってプレビューを即時更新、キャンセルなら元に戻す
-  avatarInput.addEventListener('change', (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (!file) {
+    // ファイル選択時はObject URLを作ってプレビューを即時更新、キャンセルなら元に戻す
+    avatarInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) {
+        if (lastObjectUrl) { URL.revokeObjectURL(lastObjectUrl); lastObjectUrl = null; }
+        return;
+      }
+
       if (lastObjectUrl) { URL.revokeObjectURL(lastObjectUrl); lastObjectUrl = null; }
-      return;
-    }
 
-    if (lastObjectUrl) { URL.revokeObjectURL(lastObjectUrl); lastObjectUrl = null; }
+      const url = URL.createObjectURL(file);
+      lastObjectUrl = url;
+      avatarPreview.src = url;
+      avatarPreview.onload = () => {
+        URL.revokeObjectURL(url);
+        if (lastObjectUrl === url) lastObjectUrl = null;
+      };
+    });
 
-    const url = URL.createObjectURL(file);
-    lastObjectUrl = url;
-    avatarPreview.src = url;
-    avatarPreview.onload = () => {
-      URL.revokeObjectURL(url);
-      if (lastObjectUrl === url) lastObjectUrl = null;
-    };
+    // 画像クリックでファイル選択をトリガー
+    avatarPreview.style.cursor = 'pointer';
+    avatarPreview.addEventListener('click', () => { avatarInput.click(); });
   });
-
-  // 画像クリックでファイル選択をトリガー
-  avatarPreview.style.cursor = 'pointer';
-  avatarPreview.addEventListener('click', () => { avatarInput.click(); });
-});
 </script>

@@ -2,13 +2,12 @@
   <div class="login-card">
     
     <div class="text-center">
-      <div class="logo-circle">
-        <i class="bi bi-code-slash"></i>
+      <div class="login-logo-icon">
+        <i class="bi bi-code-slash" style="font-size: 3rem; color: white;"></i>
       </div>
       <h1 class="login-title">新規登録</h1>
       <p class="login-subtitle">学習の旅を始めましょう</p>
     </div>
-
     <div class="card">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } }) do |f| %>
         <div class="mb-4">

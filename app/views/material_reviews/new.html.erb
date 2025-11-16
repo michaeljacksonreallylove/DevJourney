@@ -1,33 +1,89 @@
 <%= render "shared/error_messages", object: @material_review %>
 
-<%= form_with model: @material_review, local: true do |f| %>
-  <div>
-    <%= f.label "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-9">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-logo-icon">
+            <i class="bi bi-star"></i>
+          </div>
+          <div>
+            <h2 class="card-header-title">レビューを投稿</h2>
+            <p class="card-header-subtitle">学習教材のレビューを共有しましょう</p>
+          </div>
+        </div>
 
-  <div>
-    <% (1..5).each do |n| %>
-      <label id="star-<%= n %>" style="cursor: pointer;">
-        <%= f.radio_button :score, n, style: 'display: none;' %>
-        <span class="text-fz-30px" style="color: <%= (n <= @score.to_i) ? '#ffd700' : '#ccc' %>;">★</span> 
-      </label>
-    <% end %>
-  </div>
+        <div class="card-body">
+          <%= form_with model: @material_review, local: true do |f| %>
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-chat-square-text label-icon"></i>
+                Title
+                <span class="required-mark">*</span>
+              </label>
+              <%= f.text_field :title, class: "form-control text-field-form", placeholder: "レビューのタイトルを入力してください" %>
+            </div>
 
-  <div>
-    <%= f.label "レビュー内容" %>
-    <%= f.text_area :description %>
-  </div>
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-link-45deg label-icon"></i>
+                Material URL
+              </label>
+              <%= f.url_field :material_url, class: "form-control text-field-form", placeholder: "教材のURLを入力してください (例: https://example.com/material)" %>
+            </div>
 
-  <div>
-    <%= f.label "教材URL" %>
-    <%= f.url_field :material_url %>
-  </div>
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-star label-icon"></i>
+                Score
+                <span class="required-mark">*</span>
+              </label>
+              <div class="star-rating">
+                <% (1..5).each do |n| %>
+                  <label class="star-btn">
+                    <%= f.radio_button :score, n, checked: (@score == n), style: 'display: none;' %>
+                    <i class="bi bi-star-fill"></i>
+                    <%= n %>
+                  </label>
+                <% end %>
+              </div>
+              <p class="form-compliment">1 (低評価) 〜 5 (高評価) で選択してください</p>
+            </div>
 
-  <div>
-    <%= f.submit "レビューを投稿" %>
-  </div>
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-file-earmark-text label-icon"></i>
+                Description
+                <span class="required-mark">*</span>
+              </label>
+              <%= f.text_area :description, class: "form-control", rows: 6, placeholder: "この教材について詳しく教えてください。どんな点が良かったですか？どんな人におすすめですか？" %>
+            </div>
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
-<% end %>
+            <%= f.submit "レビューを投稿", class: "btn btn-submit w-100" %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const starButtons = document.querySelectorAll('.star-btn');
+    starButtons.forEach(starButton => {
+        const radioInput = starButton.querySelector('input[type="radio"]');
+        // 初期状態で選択されている星にスタイルを適用
+        if (radioInput.checked) {
+            starButton.classList.add('selected');
+        }
+
+        // クリックされた星を選択状態、他の星の選択状態を解除
+        starButton.addEventListener('click', () => {
+            starButtons.forEach(btn => btn.classList.remove('selected'));
+            starButton.classList.add('selected');
+        });
+    });
+  });
+</script>
