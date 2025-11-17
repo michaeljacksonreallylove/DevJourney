@@ -1,4 +1,19 @@
-<%= render partial: "reviews", collection: @material_reviews, as: :material_review %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-9">
+      <div class="header-wrapper mb-4">
+        <div class="d-flex align-items-center gap-2">
+          <div class="header-icon">
+            <i class="bi bi-star"></i>
+          </div>
+          <h1 class="page-title">レビュー一覧</h1>
+        </div>
+        <p class="page-subtitle mt-2">みんなのおすすめ学習教材をチェックしよう</p>
+      </div>
+      <%= render partial: "reviews", collection: @material_reviews, as: :material_review %>
+    </div>
+  </div>
+</div>
 
 <% if user_signed_in? %>
   <a href="<%= new_material_review_path %>">新規教材投稿</a>
