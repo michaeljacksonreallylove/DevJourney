@@ -1,37 +1,31 @@
-<%= material_review.title %>
-<p><%= material_review.description %></p>
-<p>Score: <%= material_review.score %>/5</p>
-<p>URL: <a href="<%= material_review.material_url %>"><%= material_review.material_url %></a></p>
-<a href="<%= material_review.user.profile_page_uri %>">@<%= material_review.user.devjourney_id %></a>
-
-<div class="review-card p-4 mb-4">
+<div class="review-card p-4 mb-5">
   <div class="review-header mb-3">
-    <div class="user-section">
-      <a href="#profile-tanaka" class="user-avatar">田</a>
-      <div class="user-devjourney-id">@tanaka_taro</div>
-    </div>
-    <div class="review-date">2024年1月15日</div>
+    <a href="<%= material_review.user.profile_page_uri %>" class="user-section">
+      <%= image_tag material_review.user.avatar.url, class: "user-avatar" %>
+      <div class="user-devjourney-id">@<%= material_review.user.devjourney_id %></div>
+    </a>
+    <div class="review-date"><%= datetime_to_date_string(material_review.created_at) %></div>
   </div>
-  <h2 class="review-title mb-3">パブパブパニック 大博覧会</h2>
+  <h2 class="review-title mb-3"><%= material_review.title %></h2>
 
   <div class="score-display mb-3">
     <div class="stars">
-      <i class="bi bi-star-fill star-icon"></i>
-      <i class="bi bi-star-fill star-icon"></i>
-      <i class="bi bi-star-fill star-icon"></i>
-      <i class="bi bi-star-fill star-icon"></i>
-      <i class="bi bi-star-fill star-icon"></i>
+      <i class="bi bi-star-fill" style="color: <%= material_review.score >= 1 ? '#ffd700' : '#ccc' %>"></i>
+      <i class="bi bi-star-fill" style="color: <%= material_review.score >= 2 ? '#ffd700' : '#ccc' %>"></i>
+      <i class="bi bi-star-fill" style="color: <%= material_review.score >= 3 ? '#ffd700' : '#ccc' %>"></i>
+      <i class="bi bi-star-fill" style="color: <%= material_review.score >= 4 ? '#ffd700' : '#ccc' %>"></i>
+      <i class="bi bi-star-fill" style="color: <%= material_review.score == 5 ? '#ffd700' : '#ccc' %>"></i>
     </div>
-  <span class="score-badge px-2 py-1">5.0</span>
+  <span class="score-badge px-2 py-1"><%= material_review.score %>.0</span>
   </div>
 
-  <p class="review-description mb-3">
-  例えばメロン、例えば愛、ある人は人生、圧縮されたガス、拒むキス。冬の日の思い出が蘇る素晴らしい教材でした。
-  </p>
+  <%= simple_format(h(material_review.description), class: "review-description", style: "margin: 0;") %>
 
-  <div class="material-url-box px-3 py-2">
-    <i class="bi bi-link-45deg" style="color: #64748b;"></i>
-    <a href="https://example.com/material/1" class="url-link">https://example.com/material</a>
-    <i class="bi bi-box-arrow-up-right external-icon" style="color: #64748b;"></i>
-  </div>
+  <% if material_review.material_url.present? %>
+    <div class="material-url-box px-3 py-2 mt-3">
+      <i class="bi bi-link-45deg" style="color: #64748b;"></i>
+      <a href="<%= material_review.material_url %>" class="url-link"><%= material_review.material_url %></a>
+      <i class="bi bi-box-arrow-up-right external-icon" style="color: #64748b;"></i>
+    </div>
+  <% end %>
 </div>

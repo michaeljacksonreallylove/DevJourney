@@ -8,4 +8,8 @@ module ApplicationHelper
       return false
     end
   end
+
+  def datetime_to_date_string(datetime)
+    datetime&.strftime("%Y-%-m-%-d %H:%M")
+  end
 end
