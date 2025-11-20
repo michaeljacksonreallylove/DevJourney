@@ -1,3 +1,7 @@
-import { application } from "./application"
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+import { application } from "./application";
+
+const controllerFiles = import.meta.glob("./**/*_controller.js", { eager: true });
+
+Object.values(controllerFiles).forEach((controller) => {
+  application.register(controller.default.name, controller.default);
+});

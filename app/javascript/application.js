@@ -1,3 +1,7 @@
+import { Application } from "@hotwired/stimulus"
 import "@hotwired/turbo-rails"
-import "./controllers"
 import "bootstrap"
+
+export const application = Application.start()
+
+import "./controllers"
