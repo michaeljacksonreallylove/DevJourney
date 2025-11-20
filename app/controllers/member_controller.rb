@@ -7,7 +7,7 @@ class MemberController < ApplicationController
       user_id = to_user_id(member_id)
       return render template: "errors/render_404", layout: false, status: :not_found if user_id == false
       @user = User.valid.find_by(id: user_id)
-      return render template: "errors/render_404", layout: false, status: :not_found if @user.blank?
+      render template: "errors/render_404", layout: false, status: :not_found if @user.blank?
     end
   end
 end
