@@ -56,15 +56,39 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: devjourney_test
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      POSTGRES_TEST_DB: devjourney_test
+      POSTGRES_TEST_USER: postgres
+      POSTGRES_TEST_PASSWORD: password
+      POSTGRES_TEST_HOST: localhost
+      POSTGRES_TEST_PORT: 5432
+
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config google-chrome-stable
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential git libyaml-dev pkg-config \
+            chromium-browser chromium-chromedriver \
+            libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 \
+            libxkbcommon0 libxcomposite1 libxrandr2 libxdamage1 \
+            libgbm1 libasound2
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -75,11 +99,10 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+      - name: Prepare test database and run tests
+        run: |
+          bin/rails db:test:prepare
+          bin/rails test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
