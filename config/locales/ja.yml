@@ -25,6 +25,10 @@ ja:
         material_url: "教材URL"
         score: "評価"
         description: "レビュー内容"
+      mokumoku_session:
+        title: "タイトル"
+        description: "内容"
+        session_url: "ミーティングリンク(URL)"
   errors:
     format: "%{attribute} %{message}"
     messages:

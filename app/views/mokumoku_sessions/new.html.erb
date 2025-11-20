@@ -1,12 +1,64 @@
 <%= render "shared/error_messages", object: @mokumoku_session %>
 
-<%= form_with model: @mokumoku_session, local: true do |f| %>
-  title
-  <%= f.text_field :title %>
-  url
-  <%= f.url_field :session_url %>
-  description
-  <%= f.text_area :description %>
-  <%= f.submit "作成" %>
-  <%= f.hidden_field :creator_user_id, value: current_user.id %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-9">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div>
+            <h2 class="card-header-title">もくもく会を作成</h2>
+            <p class="card-header-subtitle">オンラインで同じ仲間と一緒に作業しよう!</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <%= form_with model: @mokumoku_session, local: true do |f| %>
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-chat-square-text label-icon"></i>
+                タイトル
+                <span class="required-mark">*</span>
+              </label>
+              <%= f.text_field :title, class: "form-control text-field-form", placeholder: "例: Ruby学習もくもく会" %>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-camera-video label-icon"></i>
+                ミーティングリンク(URL)
+                <span class="required-mark">*</span>
+              </label>
+              <%= f.url_field :session_url, class: "form-control text-field-form", placeholder: "https://zoom.us/xxx-xxxx-xxx" %>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label label-with-icon">
+                <i class="bi bi-file-earmark-text label-icon"></i>
+                説明
+              </label>
+              <%= f.text_area :description, class: "form-control", rows: 6, placeholder: "もくもく会の内容や、どんな人におすすめかなどを書いてください" %>
+            </div>
+
+            <div class="attention-area p-3 mb-4">
+              <i class="bi bi-info-circle" style="color: #2563eb;"></i>
+              <div>
+                <p class="attention-title m-0">
+                    作成前の確認
+                </p>
+                <p class="attention-content m-0">
+                    ミーティングリンクが正しいか確認してください。作成後は他のユーザーに公開されます。
+                </p>
+              </div>
+            </div>
+
+            <%= f.submit "作成する", class: "btn btn-submit w-100" %>
+            <%= f.hidden_field :creator_user_id, value: current_user.id %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
