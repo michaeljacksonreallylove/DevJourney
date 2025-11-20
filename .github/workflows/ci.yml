@@ -88,7 +88,7 @@ jobs:
             chromium-browser chromium-chromedriver \
             libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 \
             libxkbcommon0 libxcomposite1 libxrandr2 libxdamage1 \
-            libgbm1 libasound2
+            libgbm1 libasound2t64
 
       - name: Checkout code
         uses: actions/checkout@v4
