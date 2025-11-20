@@ -1,7 +1,7 @@
 class MaterialReviewsController < ApplicationController
   def index
-    @material_reviews = MaterialReview.includes(:user)
-                                      .where(is_deleted: false)
+    @material_reviews = MaterialReview.valid
+                                      .includes(:user)
                                       .where(users: { is_deleted: false })
                                       .order(created_at: :desc)
   end

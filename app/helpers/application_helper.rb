@@ -12,4 +12,8 @@ module ApplicationHelper
   def datetime_to_date_string(datetime)
     datetime&.strftime("%Y-%-m-%-d %H:%M")
   end
+
+  def datetime_to_time_string(datetime)
+    datetime&.strftime("%H:%M")
+  end
 end

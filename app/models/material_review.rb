@@ -6,4 +6,6 @@ class MaterialReview < ApplicationRecord
   validates :score, presence: true
 
   belongs_to :user
+
+  scope :valid, -> { where(is_deleted: false) }
 end

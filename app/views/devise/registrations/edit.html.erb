@@ -1,3 +1,5 @@
+<%= render "shared/error_messages", object: resource %>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-md-9 col-lg-9">
@@ -14,11 +16,13 @@
             <div class="mb-4">
               <%= f.label :name, class: "form-label" %><br />
               <%= f.text_field :name, class: "form-control", placeholder: "名前を入力してください" %>
+              <div class="form-text">20文字以内で入力してください。</div>
             </div>
 
             <div class="mb-4">
               <%= f.label :introduction, class: "form-label" %>
               <%= f.text_area :introduction, class: "form-control", placeholder: "簡単な自己紹介文を入力してください", rows: 6 %>
+              <div class="form-text">300文字以内で入力してください。</div>
             </div>
 
             <div class="mb-4">
@@ -28,16 +32,9 @@
 
             <div class="mb-2">
               <%= f.label :devjourney_id, class: "form-label" %>
-              <% if resource && resource.errors[:devjourney_id].present? %>
-                <div class="field-error">
-                  <% resource.errors.full_messages_for(:devjourney_id).each do |msg| %>
-                    <div class="field-error-item"><%= msg %></div>
-                  <% end %>
-                </div>
-              <% end %>
               <%= f.text_field :devjourney_id, class: "form-control", placeholder: "devjourney_yourname" %>
+              <div class="form-text">他のユーザーと重複してはいけません。</div>
             </div>
-            <div class="form-text">他のユーザーと重複してはいけません。</div>
 
             <div class="row g-3 mt-4">
               <div class="col-6">

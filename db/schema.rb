@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_14_080550) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_18_110443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_14_080550) do
     t.text "material_url", comment: "教材URL"
     t.integer "score", null: false, comment: "評価スコア(1~5段階)"
     t.text "description", null: false, comment: "レビュー内容"
+    t.boolean "is_deleted", default: false, null: false, comment: "削除フラグ"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mokumoku_sessions", force: :cascade do |t|
+    t.integer "creator_user_id", null: false, comment: "もくもく会作成者のユーザーID"
+    t.string "title", null: false, comment: "もくもく会タイトル"
+    t.text "description", comment: "もくもく会説明"
+    t.text "session_url", null: false, comment: "もくもく会URL"
+    t.datetime "expired_at", null: false, comment: "もくもく会投稿表示期限"
     t.boolean "is_deleted", default: false, null: false, comment: "削除フラグ"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

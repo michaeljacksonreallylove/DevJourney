@@ -1,0 +1,12 @@
+<%= render "shared/error_messages", object: @mokumoku_session %>
+
+<%= form_with model: @mokumoku_session, local: true do |f| %>
+  title
+  <%= f.text_field :title %>
+  url
+  <%= f.url_field :session_url %>
+  description
+  <%= f.text_area :description %>
+  <%= f.submit "作成" %>
+  <%= f.hidden_field :creator_user_id, value: current_user.id %>
+<% end %>

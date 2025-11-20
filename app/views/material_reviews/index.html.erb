@@ -8,7 +8,7 @@
           </div>
           <h1 class="page-title">おすすめ教材•レビュー</h1>
         </div>
-        <p class="page-subtitle mt-2">みんなのおすすめ学習教材をチェックしよう</p>
+        <p class="page-subtitle mt-2">みんなのおすすめ学習教材をチェックしよう!</p>
       </div>
       <%= render partial: "reviews", collection: @material_reviews, as: :material_review %>
     </div>
@@ -16,8 +16,10 @@
 </div>
 
 <% if user_signed_in? %>
-  <a href="<%= new_material_review_path %>" class="btn btn-submit write-review-btn">
-    <i class="bi bi-plus-lg"></i>
-    <div class="ps-1">レビューを投稿する</div>
-  </a>
+  <div class="d-flex justify-content-center">
+    <a href="<%= new_material_review_path %>" class="btn btn-submit write-review-btn">
+      <i class="bi bi-plus-lg"></i>
+      <div class="ps-1">レビューを投稿する</div>
+    </a>
+  </div>
 <% end %>

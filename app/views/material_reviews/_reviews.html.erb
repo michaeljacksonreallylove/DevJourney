@@ -1,9 +1,20 @@
 <div class="review-card p-4 mb-5">
   <div class="review-header mb-3">
-    <a href="<%= material_review.user.profile_page_uri %>" class="user-section">
-      <%= image_tag material_review.user.avatar.url, class: "user-avatar" %>
-      <div class="user-devjourney-id">@<%= material_review.user.devjourney_id %></div>
-    </a>
+    <% if material_review.user.name.present? %>
+      <a href="<%= material_review.user.profile_page_uri %>" class="user-section">
+        <%= image_tag material_review.user.avatar.url, class: "user-avatar" %>
+        <div class="user-info">
+          <div class="user-name"><%= material_review.user.name %></div>
+          <div class="user-devjourney-id">@<%= material_review.user.devjourney_id %></div>
+        </div>
+      </a>
+    <% else %>
+      <a href="<%= material_review.user.profile_page_uri %>" class="user-section">
+        <%= image_tag material_review.user.avatar.url, class: "user-avatar" %>
+        <div class="user-devjourney-id">@<%= material_review.user.devjourney_id %></div>
+      </a>
+    <% end %>
+
     <div class="review-date"><%= datetime_to_date_string(material_review.created_at) %></div>
   </div>
   <h2 class="review-title mb-3"><%= material_review.title %></h2>
@@ -19,7 +30,9 @@
   <span class="score-badge px-2 py-1"><%= material_review.score %>.0</span>
   </div>
 
-  <%= simple_format(h(material_review.description), class: "review-description", style: "margin: 0;") %>
+  <div class="review-description">
+    <%= simple_format(h(material_review.description)) %>
+  </div>
 
   <% if material_review.material_url.present? %>
     <div class="material-url-box px-3 py-2 mt-3">

@@ -40,5 +40,12 @@
         <i class="bi bi-star"></i>
         <span>おすすめ教材•レビュー</span>
       </a>
+
+    <% if user_signed_in? %>
+      <a href="<%= mokumoku_sessions_path %>" class="nav-link <%= 'active' if current_page?(mokumoku_sessions_path) %>">
+        <i class="bi bi-people"></i>
+        <span>もくもく会</span>
+      </a>
+    <% end %>
   </nav>
 </aside>

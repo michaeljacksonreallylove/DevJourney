@@ -1,0 +1,45 @@
+<div class="col-12 col-lg-4">
+  <div class="mokumoku-card p-4 mb-5">
+    <div class="mokumoku-header mb-3">
+      <% if mokumoku_session.user.name.present? %>
+        <a href="<%= mokumoku_session.user.profile_page_uri %>" class="user-section">
+          <%= image_tag mokumoku_session.user.avatar.url, class: "user-avatar" %>
+          <div class="user-info">
+            <div class="user-name"><%= mokumoku_session.user.name %></div>
+            <div class="user-devjourney-id">@<%= mokumoku_session.user.devjourney_id %></div>
+          </div>
+        </a> 
+      <% else %> 
+        <a href="<%= mokumoku_session.user.profile_page_uri %>" class="user-section">
+          <%= image_tag mokumoku_session.user.avatar.url, class: "user-avatar" %>
+          <div class="user-devjourney-id">@<%= mokumoku_session.user.devjourney_id %></div>
+        </a>
+      <% end %>
+
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center gap-2 px-2 py-1.5"
+          style="
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            border-radius: 0.5rem;
+            height: 2.0rem;">
+          <i class="bi bi-watch" style="color: #2563eb;"></i>
+          <span class="text-sm" style="font-weight: 700; color: #2563eb;">
+            <%= datetime_to_time_string(mokumoku_session.created_at) %>~
+          </span>
+        </div>
+      </div>
+    </div>
+    <h2 class="mokumoku-title mb-3"><%= mokumoku_session.title %></h2>
+
+    <div class="mokumoku-description">
+      <%= simple_format(h(mokumoku_session.description)) %>
+    </div>
+
+    <div class="mokumoku-url-box px-3 py-2 my-3">
+        <i class="bi bi-camera-video" style="color: #64748b;"></i>
+        <a href="<%= mokumoku_session.session_url %>" class="url-link"><%= mokumoku_session.session_url %></a>
+    </div>
+    <a href="<%= mokumoku_session.session_url %>" class="btn btn-submit w-100">参加する</a>
+  </div>
+</div>

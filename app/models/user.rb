@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, presence: true
-  validates :name, length: { maximum: 50 }, allow_blank: true
+  validates :name, length: { maximum: 20 }, allow_blank: true
   validates :github_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
-  validates :introduction, length: { maximum: 500 }, allow_blank: true
+  validates :introduction, length: { maximum: 300 }, allow_blank: true
 
   # password が存在する場合にのみ適用（更新時に空ならスキップ）
   # 半角（ASCII printable）文字のみを許容し、大文字・小文字・数字を各1文字以上含むことを要求

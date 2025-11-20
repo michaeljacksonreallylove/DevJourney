@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get "member/profile/:member_id" => "member#profile"
 
   resources :material_reviews, only: %i[index new create]
+
+  resources :mokumoku_sessions, only: %i[index new create]
 end
