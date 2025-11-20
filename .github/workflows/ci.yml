@@ -99,6 +99,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Disable jsbundling tasks
+        run: mkdir -p app/assets/builds
+
       - name: Prepare test database and run tests
         run: |
           bin/rails db:test:prepare
