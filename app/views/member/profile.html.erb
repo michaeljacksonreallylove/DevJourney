@@ -1,6 +1,97 @@
-プロフィール画面
+<div class="container">
+	<div class="card left-border-blue mb-4">
+		<div class="p-4">
+			<div class="profile-top">
+				<%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "avatar-profile" %>
 
-<%= @user.name %>
+				<div class="profile-info">
+					<div class="d-flex justify-content-between align-items-start gap-5">
+						<div>
+							<% if @user.name.present? %>
+								<h1 class="profile-name mb-1"><%= @user.name %></h1>
+							<% end %>
+							<p class="text-sm d-flex align-items-center gap-2 m-0">@<%= @user.devjourney_id %></p>
+						</div>
+						<% if current_user == @user %>
+						  <a href="<%= edit_user_registration_path %>" class="btn btn-submit">プロフィール編集</a>
+						<% end %>
+					</div>
+					<p class="mt-2">
+						<%= @user.introduction.present? ? h(@user.introduction) : "自己紹介は未設定です。" %>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<%= image_tag @user.avatar.url, alt: "プロフィール画像" %>
-<a href="<%= edit_user_registration_path %>">プロフィールを編集</a>
+	<div class="row align-items-stretch gy-3 mb-4">
+		<div class="col-md-12 col-lg-4">
+			<div class="card d-flex flex-column justify-content-center p-3 h-100" style="background: #4176eaff; color: #fff;">
+				<div class="d-flex align-items-center justify-content-between">
+					<div class="ms-3">
+						<p class="fw-bold fs-6 m-0" style="color:rgba(255,255,255,0.85)">レビュー投稿数</p>
+						<p class="text-center fs-2 fw-bold my-2"><%= @material_reviews.present? ? @material_reviews.count : 0 %></p>
+					</div>
+					<div class="icon profile-icon-post me-3">
+						<i class="bi bi-file-earmark-text" style="font-size: 2rem;"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12 col-lg-4">
+			<div class="card d-flex flex-column justify-content-center p-4 h-100">
+				<div class="d-flex align-items-center gap-4 mb-3">
+					<div class="icon profile-icon-calender">
+						<i class="bi bi-calendar-event" style="font-size: 1.5rem; color: #fff;"></i>
+					</div>
+					<div class="d-flex flex-column gap-1">
+						<p class="text-sm m-0">参加日</p>
+						<p class="text-bold m-0"><%= datetime_to_year_month_string(@user.created_at) %></p>
+					</div>
+				</div>
+				<div class="d-flex align-items-center gap-4">
+					<div class="icon profile-icon-clock">
+						<i class="bi bi-clock" style="font-size: 1.5rem; color: #fff;"></i>
+					</div>
+					<div class="d-flex flex-column gap-1">
+						<p class="text-sm m-0">最終アクティブ</p>
+						<p class="text-bold m-0"><%= time_ago_in_words(@user.last_sign_in_at) %>前</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12 col-lg-4">
+			<div class="card d-flex flex-column justify-content-center gap-2 p-4 h-100">
+        <div class="d-flex align-items-center gap-3">
+					<div class="icon profile-icon-github">
+						<i class="bi bi-github" style="font-size: 1.5rem; color: #fff;"></i>
+					</div>
+					<p class="text-bold m-0">GitHub</p>
+				</div>
+				<% if @user.github_url.present? %>
+				  <a href="<%= @user.github_url %>" target="_blank" rel="noopener"><%= @user.github_url %></a>
+				<% else %>
+				  <p class="m-0">未設定</p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<% if @material_reviews.present? %>
+	<div class="row justify-content-center">
+    <div class="col-12 col-md-9 col-lg-9">
+			<div class="header-wrapper my-5">
+				<div class="d-flex align-items-center gap-2">
+					<div class="header-icon">
+						<i class="bi bi-star"></i>
+					</div>
+					<h1 class="page-title">最近のレビュー投稿</h1>
+				</div>
+			</div>
+			<%= render partial: "material_reviews/reviews", collection: @material_reviews.limit(3), as: :material_review %>	
+	  </div>
+	</div>
+	<% end %>
+</div>
