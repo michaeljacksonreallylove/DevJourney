@@ -1,6 +1,6 @@
 <div class="col-12 col-lg-4">
-  <div class="mokumoku-card p-4 mb-5">
-    <div class="mokumoku-header mb-3">
+  <div class="card left-border-blue p-4 mb-5">
+    <div class="d-flex align-items-start justify-content-between mb-3">
       <% if mokumoku_session.user.name.present? %>
         <a href="<%= mokumoku_session.user.profile_page_uri %>" class="user-section">
           <%= image_tag mokumoku_session.user.avatar.url, class: "user-avatar" %>
@@ -33,8 +33,8 @@
 
     <div class="mokumoku-url-box px-3 py-2 my-3">
         <i class="bi bi-camera-video" style="color: #64748b;"></i>
-        <a href="<%= mokumoku_session.session_url %>" class="url-link"><%= mokumoku_session.session_url %></a>
+        <a href="<%= mokumoku_session.session_url %>" target="_blank" rel="noopener" class="url-link"><%= mokumoku_session.session_url %></a>
     </div>
-    <a href="<%= mokumoku_session.session_url %>" class="btn btn-submit w-100">参加する</a>
+    <a href="<%= mokumoku_session.session_url %>" target="_blank" rel="noopener" class="btn btn-submit w-100">参加する</a>
   </div>
 </div>

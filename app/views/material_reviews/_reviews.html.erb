@@ -1,5 +1,5 @@
-<div class="review-card p-4 mb-5">
-  <div class="review-header mb-3">
+<div class="card left-border-blue p-4 mb-5">
+  <div class="d-flex align-items-start justify-content-between mb-3">
     <% if material_review.user.name.present? %>
       <a href="<%= material_review.user.profile_page_uri %>" class="user-section">
         <%= image_tag material_review.user.avatar.url, class: "user-avatar" %>
@@ -37,7 +37,7 @@
   <% if material_review.material_url.present? %>
     <div class="material-url-box px-3 py-2 mt-3">
       <i class="bi bi-link-45deg" style="color: #64748b;"></i>
-      <a href="<%= material_review.material_url %>" class="url-link"><%= material_review.material_url %></a>
+      <a href="<%= material_review.material_url %>" target="_blank" rel="noopener" class="url-link"><%= material_review.material_url %></a>
       <i class="bi bi-box-arrow-up-right external-icon" style="color: #64748b;"></i>
     </div>
   <% end %>

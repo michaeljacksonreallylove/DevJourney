@@ -10,10 +10,14 @@ module ApplicationHelper
   end
 
   def datetime_to_date_string(datetime)
-    datetime&.strftime("%Y-%-m-%-d %H:%M")
+    datetime.present? ? datetime.strftime("%Y-%-m-%-d %H:%M") : ""
   end
 
   def datetime_to_time_string(datetime)
-    datetime&.strftime("%H:%M")
+    datetime.present? ? datetime.strftime("%H:%M") : ""
+  end
+
+  def datetime_to_year_month_string(datetime)
+    datetime.present? ? datetime.strftime("%Y年%-m月") : ""
   end
 end

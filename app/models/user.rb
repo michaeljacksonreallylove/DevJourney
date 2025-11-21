@@ -12,11 +12,12 @@ class User < ApplicationRecord
   # password が存在する場合にのみ適用（更新時に空ならスキップ）
   # 半角（ASCII printable）文字のみを許容し、大文字・小文字・数字を各1文字以上含むことを要求
   validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\x21-\x7E]+\z/, message: "は半角英数字で、英大文字・英小文字・数字を各1文字以上含めてください" }, allow_blank: true
-
   validates :devjourney_id,
             presence: true,
             length: { maximum: 30 },
             uniqueness: { case_sensitive: false }
+
+  has_many :material_reviews
 
   scope :valid, -> { where(is_deleted: false) }
 

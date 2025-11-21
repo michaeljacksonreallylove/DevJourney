@@ -285,6 +285,14 @@ body {
 }
 /*  */
 
+.icon {
+    backdrop-filter: blur(10px);
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .avatar-preview {
     width: 120px;
     height: 120px;
@@ -305,6 +313,12 @@ body {
     color: #0f172a;
     margin: 0;
     text-align: center;
+}
+
+@media (max-width: 991.98px) {
+    .page-title {
+        font-size: 1.875rem;
+    }
 }
 
 .error-card {
@@ -374,10 +388,12 @@ body {
 }
 
 .card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
     border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     overflow: hidden;
+    border: none;
 }
 
 .card-body {
@@ -508,21 +524,8 @@ body {
     color: #64748b;
 }
 
-.review-card,
-.mokumoku-card {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
+.left-border-blue {
     border-left: 4px solid #2563eb;
-}
-
-.review-header,
-.mokumoku-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
 }
 
 .user-section {
@@ -677,4 +680,90 @@ body {
     color: #475569; 
     font-size: 0.8125rem; 
     line-height: 1.5;
+}
+
+.profile-top { 
+    display: flex; 
+    gap: 1.5rem; 
+    align-items: center; 
+}
+
+.profile-info { 
+    flex:1; 
+    padding-top:8px; 
+}
+
+@media (max-width: 767.98px){
+  .profile-top { 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .profile-info { 
+    padding-top: 12px; 
+  }
+}
+
+.avatar-profile {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(138, 155, 193, 0.3);
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-name { 
+    font-size: 28px; 
+    color: #0f172a; 
+    font-weight :700; 
+}
+
+.profile-icon-post {
+    width: 4rem;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.profile-icon-calender {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(180deg, #ff7a18, #ec023c);
+
+}
+
+.profile-icon-clock {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(180deg, #34d399, #059669);
+
+}
+
+.profile-icon-github {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(180deg, #0f0f11, #0e1218);
+}
+
+.text-sm { 
+    font-size: 0.875rem; 
+    color: #64748b; 
+}
+
+.text-bold { 
+    font-weight: 700;
+    color: #0f172a; 
+}
+
+@media (max-width: 767.98px){
+  .profile-top { 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .profile-info { 
+    padding-top: 12px; 
+  }
 }
