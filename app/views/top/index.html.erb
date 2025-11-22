@@ -1,0 +1,137 @@
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-9 col-lg-9">
+			<!-- Hero Section -->
+			<div class="home-title-section mb-4">
+				<div class="home-title-pattern"></div>
+				<div class="text-center" style="position: relative;">
+					<h1 class="fw-bold text-white mb-3">DevJourneyへようこそ 👋</h1>
+					<p class="text-white mb-4">
+						プログラミング学習者のためのコミュニティプラットフォーム。<br/>
+						教材をレビューし、仲間と一緒にもくもく会で学習しましょう。
+					</p>
+				</div>
+			</div>
+
+			<div class="mb-5">
+				<div class="text-center mb-4">
+					<h2 class="fs-2 fw-bold mb-2">DevJourneyでできること</h2>
+					<p class="text-muted fs-5">学習をもっと楽しく、もっと効果的に</p>
+				</div>
+
+				<div class="row g-4">
+					<div class="col-lg-6">
+						<div class="card h-100">
+							<div class="p-4">
+								<div class="icon icon-lg gradient-purple mb-4">
+									<i class="bi bi-people"></i>
+								</div>
+								<h3 class="fw-bold fs-5 mb-3">もくもく会に参加</h3>
+								<p class="text-muted mb-3">
+									オンラインで仲間と一緒に学習。自分でもくもく会を企画して主催することもできます。定期的な学習習慣を作りましょう。
+								</p>
+								<% if !user_signed_in? %>
+									<div class="d-flex align-items-center gap-2 text-muted small">
+										<i class="bi bi-lock"></i>
+										<span>参加・企画にはログインが必要</span>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="card h-100">
+							<div class="p-4">
+								<div class="icon icon-lg gradient-yellow mb-4">
+									<i class="bi bi-star"></i>
+								</div>
+								<h3 class="fw-bold fs-5 mb-3">教材をレビュー</h3>
+								<p class="text-muted mb-3">
+									使った教材を評価・レビュー。他の学習者のレビューを参考に、自分に合った教材を見つけられます。良質な教材を共有しましょう。
+								</p>
+								<% if !user_signed_in? %>
+									<div class="d-flex align-items-center gap-2 text-muted small">
+										<i class="bi bi-lock"></i>
+										<span>レビュー投稿にはログインが必要</span>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Content -->
+				<!-- Live Mokumoku Sessions -->
+			<div class="card mb-4">
+				<div class="card-body p-4">
+					<div class="d-flex align-items-center gap-3 mb-4">
+						<div class="icon icon-md gradient-purple-pink">
+							<i class="bi bi-camera-video"></i>
+						</div>
+						<div>
+							<h5 class="fw-bold mb-1">🔴 開催中のもくもく会</h5>
+							<p class="text-muted small mb-0">オンラインで早速参加しよう!</p>
+						</div>
+					</div>
+
+					<%= render partial: "top/mokumoku_sessions", collection: @mokumoku_sessions, as: :mokumoku_session %>
+					
+					<div class="text-center pt-3">
+						<% if user_signed_in? %>
+							<a href="<%= new_mokumoku_session_path %>" class="btn text-purple fw-bold" style="color: #9333ea">
+								<i class="bi bi-plus-lg me-1"></i>
+								もくもく会を企画する
+							</a>
+						<% else %>
+							<div class="d-block justify-content-center">
+								<p class="text-muted small m-0">もくもく会を企画するにはログインが必要です</p>
+								<a href="<%= new_user_session_path %>" class="btn fw-bold" style="color: #9333ea">
+									<i class="bi bi-plus-lg me-1"></i>
+									もくもく会を企画する
+									<i class="bi bi-lock ms-1"></i>
+								</a>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<!-- Reviews -->
+			<div class="card">
+				<div class="card-body">
+					<div class="d-flex align-items-center gap-3 mb-4">
+						<div class="icon icon-md gradient-yellow-orange">
+							<i class="bi bi-star"></i>
+						</div>
+						<div>
+							<h5 class="fw-bold mb-1">📚 最新の教材レビュー</h5>
+							<p class="text-muted small mb-0">気になる教材をチェックしよう!</p>
+						</div>
+					</div>
+
+					<%= render partial: "material_reviews/reviews", collection: @material_reviews, as: :material_review %>
+
+					<div class="text-center pt-3">
+						<% if user_signed_in? %>
+							<a href="<%= new_material_review_path %>" class="btn fw-bold" style="color: #ea580c;">
+								<i class="bi bi-star me-1"></i>
+								レビューを投稿する
+							</a>
+						<% else %>
+							<div class="d-block justify-content-center">
+								<p class="text-muted small m-0">レビューを投稿するにはログインが必要です</p>
+								<a href="<%= new_user_session_path %>" class="btn fw-bold" style="color: #ea580c;">
+									<i class="bi bi-star me-1"></i>
+									レビューを投稿する
+									<i class="bi bi-lock ms-1"></i>
+								</a>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
