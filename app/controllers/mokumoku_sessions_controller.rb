@@ -1,7 +1,5 @@
 class MokumokuSessionsController < ApplicationController
   def index
-    return render template: "errors/render_404", layout: false, status: :not_found unless user_signed_in?
-
     # 未削除、期限有効なセッションのみ取得
     @mokumoku_sessions = MokumokuSession.valid
                                         .includes(:user)
