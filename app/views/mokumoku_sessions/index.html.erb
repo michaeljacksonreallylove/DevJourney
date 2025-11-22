@@ -8,7 +8,10 @@
           </div>
           <h1 class="page-title">もくもく会</h1>
         </div>
-        <p class="page-subtitle mt-2">みんなで一緒に学習を進めよう!</p>
+        <p class="page-subtitle mt-2 mb-0">みんなで一緒に学習を進めよう!</p>
+        <% if !user_signed_in? %>
+          <p class="page-subtitle mt-2 mb-0">(もくもく会の作成はログインが必要です)</p>
+        <% end %>
       </div>
       <div class="row">
         <%= render partial: "mokumoku_sessions", collection: @mokumoku_sessions, as: :mokumoku_session %>
@@ -17,9 +20,11 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center">
-  <a href="<%= new_mokumoku_session_path %>" class="btn btn-submit make-session-btn">
-      <i class="bi bi-plus-lg"></i>
-      <div class="ps-1">もくもく会を開催する</div>
-  </a>
-</div>
+<% if user_signed_in? %>
+  <div class="d-flex justify-content-center">
+    <a href="<%= new_mokumoku_session_path %>" class="btn btn-submit make-session-btn">
+        <i class="bi bi-plus-lg"></i>
+        <div class="ps-1">もくもく会を開催する</div>
+    </a>
+  </div>
+<% end %>

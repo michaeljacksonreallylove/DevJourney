@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar d-md-block d-none">
   <div class="sidebar-header">
     <a class="navbar-brand" href="<%= root_path %>">
       <div class="sidebar-logo-icon">
@@ -8,44 +8,72 @@
     </a>
   </div>
 
-  <nav class="sidebar-nav">
-    <a href="<%= root_path %>" class="nav-link <%= 'active' if current_page?(root_path) %>">
-      <i class="bi bi-house"></i>
-      <span>ホーム</span>
-    </a>
+  <nav class="p-3">
+    <div class="d-flex flex-column justify-content-between h-100">
+      <div>
+        <a href="<%= root_path %>" class="nav-link <%= 'active' if current_page?(root_path) %>">
+          <i class="bi bi-house"></i>
+          <span>ホーム</span>
+        </a>
 
-    <% if user_signed_in? %>
-      <a href=<%= current_user.profile_page_uri %> class="nav-link <%= 'active' if current_page?(current_user.profile_page_uri) %>">
-        <i class="bi bi-person"></i>
-        <span>プロフィール</span>
-      </a>
+        <% if user_signed_in? %>
+          <a href=<%= current_user.profile_page_uri %> class="nav-link <%= 'active' if current_page?(current_user.profile_page_uri) %>">
+            <i class="bi bi-person"></i>
+            <span>プロフィール</span>
+          </a>
+        <% end %>
 
-      <%= button_to destroy_user_session_path, method: :delete, class: "nav-link", form: { class: "d-inline" } do %>
-        <i class="bi bi-box-arrow-right"></i>
-        <span>ログアウト</span>
-      <% end %>
-    <% else %>
-      <a href="<%= new_user_session_path %>" class="nav-link <%= 'active' if current_page?(new_user_session_path) %>">
-        <i class="bi bi-person"></i>
-        <span>ログイン</span>
-      </a>
+        <a href="<%= material_reviews_path %>" class="nav-link <%= 'active' if current_page?(material_reviews_path) %>">
+          <i class="bi bi-star"></i>
+          <span>おすすめ教材•レビュー</span>
+        </a>
 
-      <a href="<%= new_user_registration_path %>" class="nav-link <%= 'active' if current_page?(new_user_registration_path) %>">
-        <i class="bi bi-person-plus"></i>
-        <span>新規登録</span>
-      </a>
-    <% end %>
+        <a href="<%= mokumoku_sessions_path %>" class="nav-link <%= 'active' if current_page?(mokumoku_sessions_path) %>">
+          <i class="bi bi-people"></i>
+          <span>もくもく会</span>
+        </a>
+      </div>
 
-    <a href="<%= material_reviews_path %>" class="nav-link <%= 'active' if current_page?(material_reviews_path) %>">
-        <i class="bi bi-star"></i>
-        <span>おすすめ教材•レビュー</span>
-      </a>
-
-    <% if user_signed_in? %>
-      <a href="<%= mokumoku_sessions_path %>" class="nav-link <%= 'active' if current_page?(mokumoku_sessions_path) %>">
-        <i class="bi bi-people"></i>
-        <span>もくもく会</span>
-      </a>
-    <% end %>
+      <div>
+        <% if user_signed_in? %>
+          <%= button_to destroy_user_session_path, method: :delete, class: "nav-link", form: { class: "d-inline" } do %>
+            <i class="bi bi-box-arrow-right"></i>
+            <span>ログアウト</span>
+          <% end %>
+        <% else %>
+          <a href="<%= new_user_session_path %>" class="nav-link <%= 'active' if current_page?(new_user_session_path) %>">
+            <i class="bi bi-person"></i>
+            <span>ログイン</span>
+          </a>
+        <% end %>
+      </div>
+    </div>
   </nav>
 </aside>
+
+<!-- モバイル用ヘッダー -->
+<div class="mobile-header py-2 d-md-none">
+  <a href="<%= root_path %>" class="mobile-header-btn">
+    <i class="bi bi-house"></i>
+  </a>
+  <% if user_signed_in? %>
+    <a href="<%= current_user.profile_page_uri %>" class="mobile-header-btn">
+      <i class="bi bi-person"></i>
+    </a>
+  <% end %>
+  <a href="<%= material_reviews_path %>" class="mobile-header-btn">
+    <i class="bi bi-star"></i>
+  </a>
+  <a href="<%= mokumoku_sessions_path %>" class="mobile-header-btn">
+    <i class="bi bi-people"></i>
+  </a>
+  <% if user_signed_in? %>
+    <%= button_to destroy_user_session_path, method: :delete, class: "mobile-header-btn", form: { class: "d-inline" } do %>
+      <i class="bi bi-box-arrow-right"></i>
+    <% end %>
+  <% else %>
+    <a href="<%= new_user_session_path %>" class="mobile-header-btn">
+      <i class="bi bi-box-arrow-right"></i>
+    </a>
+  <% end %>
+</div>
