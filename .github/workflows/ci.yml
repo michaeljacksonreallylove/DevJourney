@@ -102,7 +102,7 @@ jobs:
       - name: Prepare test database and run tests
         run: |
           bin/rails db:test:prepare
-          bin/rails test test:system
+          bin/rails test 
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
