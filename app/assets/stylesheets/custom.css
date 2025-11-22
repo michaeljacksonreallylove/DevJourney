@@ -41,6 +41,12 @@ body {
     flex-direction: column;
 }
 
+@media (max-width: 767.98px) {
+  .sidebar {
+      display: none;
+  }
+}
+
 .sidebar nav {
     flex: 1;
 }
