@@ -15,7 +15,7 @@
       </a>
     <% end %>
 
-    <div class="review-date"><%= datetime_to_date_string(material_review.created_at) %></div>
+    <div class="review-date"><%= time_ago_in_words(material_review.created_at) %>前</div>
   </div>
   <h2 class="review-title mb-3"><%= material_review.title %></h2>
 
