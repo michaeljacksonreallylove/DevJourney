@@ -60,6 +60,10 @@ DevJourneyはプログラミング教材のレビュー共有と、
 ---
 
 ### スマホ画面への対応
+<p align="center">
+  <img width="404" height="619" alt="Image" src="https://github.com/user-attachments/assets/cd3d13a4-92f6-4c63-bc0e-be023a653f07" />
+</p>
+
 •スマホの画面サイズの場合は、サイドバーがヘッダーに置き換わるなどアプリのモバイル対応を考慮しています
 
 ---
