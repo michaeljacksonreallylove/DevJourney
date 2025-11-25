@@ -18,7 +18,7 @@ DevJourneyはプログラミング教材のレビュー共有と、
 ## 開発背景
 
 私自身も一人のプログラミング学習者として、一番大切なことは「学習を継続すること」 だと感じています。  
-独学でプログラミングを始めたときは、「とにかくやってみよう」という気持ちで学習を始めました。しかし実際に取り組んでみると、初めて触れる考え方や理解に時間がかかる内容も多く、プログラミングの難しさを感じる場面がありました。  
+独学でプログラミングを始めたときは、「とにかくやってみよう」という気持ちで学習を始めました。しかし実際に取り組んでみると、初めて触れる考え方や理解に時間がかかる内容も多く、プログラミングの難しさを感じる場面が多くありました。  
 そのような中で支えになったのが、同じくプログラミングを学習している同級生やインターンで出会った仲間の存在です。おすすめの教材などの情報を共有し合ったり、オンライン上で一緒に作業したりすることで、学習がより進めやすくなったと感じています。  
 自身の経験を踏まえ、独学でプログラミングの学習に挑戦している人や、仲間を見つけたい人が少しでもスムーズに学習を続けられるようにしたいと思い、このサービスを開発しています。
 
@@ -59,7 +59,7 @@ DevJourneyはプログラミング教材のレビュー共有と、
 
 ---
 
-### スマホ画面への対応
+### 5. スマホ画面への対応
 <p align="center">
   <img width="404" height="619" alt="Image" src="https://github.com/user-attachments/assets/cd3d13a4-92f6-4c63-bc0e-be023a653f07" />
 </p>
@@ -104,6 +104,106 @@ GitHub Actionsによるテスト等の自動化を行なっています。
 
 ---
 
+## 工夫した点
+
+### 1. セキュリティ面
+```
+(例: mokumoku_sessions_controller.rb)
+
+class MokumokuSessionsController < ApplicationController
+  def index
+    # 未削除、期限有効なセッションのみ取得
+    @mokumoku_sessions = MokumokuSession.valid
+                                        .includes(:user)
+                                        .where(users: { is_deleted: false })
+                                        .order(created_at: :desc)
+  end
+
+  def new
+    return render template: "errors/render_404", layout: false, status: :not_found unless user_signed_in?
+    @mokumoku_session = MokumokuSession.new
+  end
+
+  def create
+    return render template: "errors/render_404", layout: false, status: :not_found unless user_signed_in?
+
+    @mokumoku_session = MokumokuSession.new(mokumoku_session_params)
+    return render template: "errors/render_404", layout: false, status: :not_found unless @mokumoku_session.creator_user_id == current_user.id
+
+    # 投稿から12時間経ったら投稿を非表示
+    @mokumoku_session.expired_at = Time.zone.now + 12.hours
+
+    if @mokumoku_session.save
+      flash[:notice] = "もくもく会を作成しました！"
+      redirect_to mokumoku_sessions_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+    def mokumoku_session_params
+      params.require(:mokumoku_session).permit(:creator_user_id, :title, :description, :session_url, :expired_at)
+    end
+end
+```
+
+•不正アクセスや情報漏洩を防ぐため、未認証アクセス時には404を返すよう設計しています。  
+
+---
+
+```
+(user.rbの一部抜粋)
+
+def member_id
+  (id * 413).to_s[1, 2] + ((17_674_114 + id) * 3).to_s + (id * 794).to_s[1, 2]
+end
+```
+
+```
+(application_helper.rbの一部抜粋)
+
+def to_user_id(member_id)
+  user_id = member_id[2..-3].to_i / 3 - 17_674_114
+  member_id2 = (user_id * 413).to_s[1, 2] + ((17_674_114 + user_id) * 3).to_s + (user_id * 794).to_s[1, 2]
+  if member_id == member_id2
+    user_id
+  else
+    false
+  end
+end
+```
+
+```
+class MemberController < ApplicationController
+  include ApplicationHelper
+
+  def profile
+    member_id = params[:member_id]
+    if member_id.to_s.match?(/\A\d+\z/)
+      user_id = to_user_id(member_id)
+      return render template: "errors/render_404", layout: false, status: :not_found if user_id == false
+
+      @user = User.valid.find_by(id: user_id)
+      return render template: "errors/render_404", layout: false, status: :not_found if @user.blank?
+
+      @material_reviews = @user.material_reviews.valid
+                                                .order(created_at: :desc)
+    end
+  end
+end
+```
+
+•URL上の識別子はランダム化することで安全性を考慮して実装を行っています。
+
+### 2. レビュー投稿に教材URLの紐付け
+「このレビューされている教材、ちょっと気になる」というユーザーニーズに応えるため、レビュー投稿と教材 URL を紐付け、リンクからすぐに教材を確認できるようにしています。
+
+### 3. もくもく会の即時性、表示期間の限定
+「いますぐ誰かと一緒に勉強したい」というユーザーニーズに応えるため、認証済ユーザーは即時にもくもく会の参加や企画ができるように設計しました。また、古い投稿が残ることによる情報の陳腐化や、UI の煩雑化を避けるため、投稿から12時間以内のもくもく会のみを表示するようにしています。
+
+---
+
 ## セットアップ（開発環境）
 
 1. リポジトリをクローン
@@ -134,3 +234,17 @@ bin/rails server
 ※ 画像処理（CarrierWave + MiniMagick 等）を使う場合は ImageMagick のインストールが必要です（macOS では `brew install imagemagick`）
 
 ---
+
+## 今後の展望・追加したい主な機能
+
+### 1. レビュー一覧、もくもく会一覧のUI/UX改善
+•現在は、レビューともくもく会の一覧はすべてのデータを一括表示する形式です。表示速度や画面の重さなどの改善に向けて、レビューはページネーションによる段階表示へ、もくもく会は必要なタイミングで取得する非同期ロードへと切り替える予定です。
+
+### 2. Open AIのAPIを用いて、入力したワードと関連のあるレビューを検索できる機能
+•OpenAI の API を使って、入力したキーワードに関連するレビューを検索できる機能を追加します。たとえば『Ruby でおすすめの教材』のように入力すると、AI がデータベースの中から内容に合ったレビューを見つけて表示してくれる仕組みです。より探しやすく、欲しい情報にすぐアクセスできるようになります。
+
+### 3. Zoom SDK(Meeting SDK)を用いて、アプリ自体にZoom機能を取り入れる
+•Zoom の Meeting SDK を活用し、アプリ内から直接 Zoom ミーティングに参加できる機能を実装する予定です。これにより、もくもく会に参加する際に外部アプリへ移動する必要がなくなり、アプリ内でそのままビデオ通話や画面共有が利用できるようになります。参加ボタンを押すだけで Zoom が立ち上がるため、操作がシンプルになり、よりスムーズにもくもく会に参加できる体験を提供できる見込みです。また、参加人数の表示や参加中の UI などもアプリ内で完結させることで、より一体感のあるサービス体験の実現を目指します。
+
+### 4. AWSに自身のサービスをデプロイする
+•AWSにデプロイしてインフラをクラウド化し、安定性や運用しやすさを向上させる予定です。
