@@ -2,8 +2,7 @@
 
 # DevJourney
 
-プログラミング学習者のための「教材レビュー・もくもく会」プラットフォームを提供するアプリ
-
+<img width="1029" height="383" alt="Image" src="https://github.com/user-attachments/assets/fd10a706-c00c-4e41-97c9-2fb498f3f3fe" />
 
 DevJourneyはプログラミング教材のレビュー共有と、
 オンラインもくもく会の企画・参加を手軽に行える学習支援サービスです。
