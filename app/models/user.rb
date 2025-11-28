@@ -22,6 +22,7 @@ class User < ApplicationRecord
   scope :valid, -> { where(is_deleted: false) }
 
   def member_id
+    # セキュリティ面を考慮し、user_idをランダム化して表示する
     (id * 413).to_s[1, 2] + ((17_674_114 + id) * 3).to_s + (id * 794).to_s[1, 2]
   end
 
