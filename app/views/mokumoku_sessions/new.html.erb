@@ -54,7 +54,7 @@
               </div>
             </div>
 
-            <%= f.submit "作成する", class: "btn btn-submit w-100" %>
+            <%= f.submit "作成する", class: "btn btn-submit w-100", id: "create-mokumoku-session-btn" %>
             <%= f.hidden_field :creator_user_id, value: current_user.id %>
           <% end %>
         </div>
@@ -62,3 +62,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const createMokumokuSessionButton = document.getElementById('create-mokumoku-session-btn')
+    createMokumokuSessionButton.addEventListener('click', (event) => {
+      if (!window.confirm("もくもく会を作成しますか？")) {
+        event.preventDefault();
+      }
+    });
+  });
+</script>

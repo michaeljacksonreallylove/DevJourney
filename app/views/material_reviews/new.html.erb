@@ -60,7 +60,7 @@
               <%= f.text_area :description, class: "form-control", rows: 6, placeholder: "この教材について詳しく教えてください。どんな点が良かったですか？どんな人におすすめですか？" %>
             </div>
 
-            <%= f.submit "レビューを投稿", class: "btn btn-submit w-100" %>
+            <%= f.submit "レビューを投稿", class: "btn btn-submit w-100", id: "create-review-btn" %>
             <%= f.hidden_field :user_id, value: current_user.id %>
           <% end %>
         </div>
@@ -73,17 +73,24 @@
   document.addEventListener("DOMContentLoaded", () => {
     const starButtons = document.querySelectorAll('.star-btn');
     starButtons.forEach(starButton => {
-        const radioInput = starButton.querySelector('input[type="radio"]');
-        // 初期状態で選択されている星にスタイルを適用
-        if (radioInput.checked) {
-            starButton.classList.add('selected');
-        }
+      const radioInput = starButton.querySelector('input[type="radio"]');
+      // 初期状態で選択されている星にスタイルを適用 
+      if (radioInput.checked) {
+        starButton.classList.add('selected');
+      }
 
-        // クリックされた星を選択状態、他の星の選択状態を解除
-        starButton.addEventListener('click', () => {
-            starButtons.forEach(btn => btn.classList.remove('selected'));
-            starButton.classList.add('selected');
-        });
+      // クリックされた星を選択状態、他の星の選択状態を解除
+      starButton.addEventListener('click', () => {
+        starButtons.forEach(btn => btn.classList.remove('selected'));
+        starButton.classList.add('selected');
+      });
+    });
+
+    const createReviewButton = document.getElementById('create-review-btn');
+    createReviewButton.addEventListener('click', (event) => {
+      if (!window.confirm("レビューを投稿しますか？")) {
+        event.preventDefault();
+      }
     });
   });
 </script>
