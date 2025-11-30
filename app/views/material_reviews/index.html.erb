@@ -11,6 +11,9 @@
         <p class="page-subtitle mt-2">みんなのおすすめ学習教材をチェックしよう!</p>
       </div>
       <%= render partial: "reviews", collection: @material_reviews, as: :material_review %>
+      <div class="mt-4 d-flex justify-content-center">
+        <%= paginate @material_reviews %>
+      </div>
     </div>
   </div>
 </div>
