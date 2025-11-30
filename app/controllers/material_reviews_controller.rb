@@ -4,6 +4,8 @@ class MaterialReviewsController < ApplicationController
                                       .includes(:user)
                                       .where(users: { is_deleted: false })
                                       .order(created_at: :desc)
+                                      .page(params[:page])
+                                      .per(10)
   end
 
   def new
