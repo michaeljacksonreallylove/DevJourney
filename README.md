@@ -204,6 +204,73 @@ end
 
 ---
 
+## ER図
+
+```mermaid
+erDiagram
+
+    USERS {
+        int id PK
+        string email
+        string devjourney_id
+        string encrypted_password
+        string reset_password_token
+        datetime reset_password_sent_at
+        datetime remember_created_at
+        integer sign_in_count
+        datetime current_sign_in_at
+        datetime last_sign_in_at
+        string current_sign_in_ip
+        string last_sign_in_ip
+        string name
+        text introduction
+        string github_url
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+        string avatar
+    }
+
+    MATERIAL_REVIEWS {
+        int id PK
+        int user_id FK
+        string title
+        text material_url
+        int score
+        text description
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+    }
+
+    MOKUMOKU_SESSIONS {
+        int id PK
+        int creator_user_id FK
+        string title
+        text description
+        text session_url
+        datetime expired_at
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+    }
+
+    USERS ||--o{ MATERIAL_REVIEWS : "posts"
+    USERS ||--o{ MOKUMOKU_SESSIONS : "creates"
+
+```
+
+### ユーザー情報に関するテーブル
+ユーザー名・ユーザーID(devjourney_id)・サインイン日時・アイコン画像などの情報をusersテーブルで管理しています。
+
+### 教材レビューの投稿に関するテーブル
+レビュータイトル・教材URL・5段階評価・レビュー内容などの情報をmaterial_reviewsテーブルで管理しています。また、usersテーブルと関連付けることで、レビュー投稿者のユーザー情報を取得できるようにしています。
+
+### もくもく会の作成に関するテーブル
+タイトル・内容・セッションURL・表示期限などの情報をmokumoku_sessionsテーブルで管理しています。また、usersテーブルと関連付けることで、もくもく会作成者のユーザー情報を取得できるようにしています。
+
+---
+
 ## セットアップ（開発環境）
 
 1. リポジトリをクローン
@@ -247,4 +314,4 @@ bin/rails server
 •Zoom の Meeting SDK を活用し、アプリ内から直接 Zoom ミーティングに参加できる機能を実装する予定です。これにより、もくもく会に参加する際に外部アプリへ移動する必要がなくなり、アプリ内でそのままビデオ通話や画面共有が利用できるようになります。参加ボタンを押すだけで Zoom が立ち上がるため、操作がシンプルになり、よりスムーズにもくもく会に参加できる体験を提供できる見込みです。また、参加人数の表示や参加中の UI などもアプリ内で完結させることで、より一体感のあるサービス体験の実現を目指します。
 
 ### 4. AWSに自身のサービスをデプロイする
-•AWSにデプロイしてインフラをクラウド化し、安定性や運用しやすさを向上させる予定です。
+•AWSにデプロイしてインフラをクラウド化し、安定性や運用しやすさの向上を目指します。
