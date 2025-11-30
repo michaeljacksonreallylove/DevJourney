@@ -28,6 +28,6 @@ class MaterialReviewsController < ApplicationController
 
   private
     def material_review_params
-      params.require(:material_review).permit(:user_id, :title, :material_url, :score, :description)
+      params.expect(material_review: [:user_id, :title, :material_url, :score, :description])
     end
 end
