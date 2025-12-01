@@ -31,6 +31,6 @@ class MokumokuSessionsController < ApplicationController
 
   private
     def mokumoku_session_params
-      params.require(:mokumoku_session).permit(:creator_user_id, :title, :description, :session_url, :expired_at)
+      params.expect(mokumoku_session: [ :creator_user_id, :title, :description, :session_url, :expired_at ])
     end
 end
