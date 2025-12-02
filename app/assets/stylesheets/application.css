@@ -9,5 +9,4 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-/* Include project-level custom overrides after defaults */
 @import "custom.css";
