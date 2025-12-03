@@ -1,4 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Application } from "@hotwired/stimulus"
+import "@hotwired/turbo-rails"
+import "bootstrap"
+
+export const application = Application.start()
+
+import "./controllers"
