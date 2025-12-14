@@ -81,7 +81,7 @@ DevJourney はプログラミング教材のレビュー共有と、
 | バックエンド   | Ruby3.4.7, Ruby on Rails8.0.3             |
 | データベース   | PostgreSQL14.19                           |
 | デザインツール | Figma                                     |
-| 環境構築       | Docker(実装中)                            |
+| 環境構築       | Docker                                   |
 | CI•CD          | GitHub Actions                            |
 | その他         | devise,CarrierWave,MiniMagick             |
 
@@ -290,6 +290,41 @@ erDiagram
 
 ## セットアップ（開発環境）
 
+### Docker を使用する場合
+
+1. リポジトリをクローン
+
+```bash
+git clone https://github.com/michaeljacksonreallylove/DevJourney.git
+cd DevJourney
+```
+
+2. Docker イメージをビルドしてコンテナを起動
+
+```bash
+docker compose -f compose.dev.yaml up --build
+```
+
+初回起動時は自動的に以下が実行されます：
+
+- 依存関係のインストール（bundle install, yarn install）
+- データベースの作成・マイグレーション
+
+3. ブラウザでアクセス
+
+http://localhost:3000
+
+4. 停止する場合
+
+```bash
+docker compose -f compose.dev.yaml down
+```
+
+※ `-v` オプションを付けるとデータベースのデータも削除されます
+
+### Docker を使用しない場合
+
+
 1. リポジトリをクローン
 
 ```bash
@@ -316,15 +351,15 @@ bin/rails db:create db:migrate
 bin/dev
 ```
 
-※ 画像処理（CarrierWave + MiniMagick 等）を使う場合は ImageMagick のインストールが必要です（macOS では `brew install imagemagick`）
+※ Dockerを使用せずに画像処理（CarrierWave + MiniMagick 等）を使う場合、別途で`ImageMagick` のインストールが必要です（macOS では `brew install imagemagick`）
 
 ---
 
 ## 今後の展望・追加したい主な機能
 
-### 1. レビュー一覧、もくもく会一覧の UI/UX 改善
+### 1. もくもく会一覧の UI/UX 改善
 
-•現在は、レビューともくもく会の一覧はすべてのデータを一括表示する形式です。表示速度や画面の重さなどの改善に向けて、レビューはページネーションによる段階表示へ、もくもく会は必要なタイミングで取得する非同期ロードへと切り替える予定です。
+•現在は、もくもく会一覧はすべてのデータを一括表示する形式です。表示速度や画面の重さなどの改善に向けて、必要なタイミングでデータを取得する非同期ロードへと切り替える予定です。
 
 ### 2. Open AI の API を用いて、入力したワードと関連のあるレビューを検索できる機能
 
