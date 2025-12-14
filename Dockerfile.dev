@@ -1,0 +1,23 @@
+FROM ruby:3.4.7
+
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g yarn
+
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev 
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock package.json yarn.lock ./
+RUN bundle install \
+    && yarn install
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY . .
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bin/dev"]
+
+EXPOSE 3000

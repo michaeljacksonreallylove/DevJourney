@@ -19,9 +19,11 @@ ja:
     failure:
       unauthenticated: "ログインしてください。"
       invalid: "認証に失敗しました。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
       already_authenticated: "すでにログイン中です。"
       timeout: "セッションの有効期限が切れました。再度ログインしてください。"
       user:
+        not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
         already_authenticated: "すでにログイン中です。"
         timeout: "セッションの有効期限が切れました。再度ログインしてください。"
     mailer:
