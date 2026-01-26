@@ -2,23 +2,30 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
-  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
-  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
+  username: user
+  password: password
+  host: db
 
 development:
   <<: *default
   database: <%= ENV.fetch("POSTGRES_DB") { "devjourney_development" } %>
 
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: <%= ENV.fetch("POSTGRES_TEST_DB") { "devjourney_test" } %>
   username: <%= ENV.fetch("POSTGRES_TEST_USER") { "postgres" } %>
   password: <%= ENV.fetch("POSTGRES_TEST_PASSWORD") { "password" } %>
-  host: <%= ENV.fetch("POSTGRES_TEST_HOST") { "localhost" } %>
+  host: <%= ENV.fetch("POSTGRES_TEST_HOST") { "db" } %>
   port: <%= ENV.fetch("POSTGRES_TEST_PORT") { 5432 } %>
 
 production:
   <<: *default
-  database: <%= ENV.fetch("POSTGRES_DB") { "devjourney_production" } %>
+  database: <%= ENV['DB_DATABASE'] %>
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
