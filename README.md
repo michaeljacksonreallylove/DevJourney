@@ -81,7 +81,7 @@ DevJourney はプログラミング教材のレビュー共有と、
 | バックエンド   | Ruby3.4.7, Ruby on Rails8.0.3             |
 | データベース   | PostgreSQL14.19                           |
 | デザインツール | Figma                                     |
-| 環境構築       | Docker                                   |
+| 環境構築       | Docker                                    |
 | CI•CD          | GitHub Actions                            |
 | その他         | devise,CarrierWave,MiniMagick             |
 
@@ -302,7 +302,7 @@ cd DevJourney
 2. Docker イメージをビルドしてコンテナを起動
 
 ```bash
-docker compose -f compose.dev.yaml up --build
+docker compose -f compose.yaml up --build
 ```
 
 初回起動時は自動的に以下が実行されます：
@@ -317,13 +317,12 @@ http://localhost:3000
 4. 停止する場合
 
 ```bash
-docker compose -f compose.dev.yaml down
+docker compose -f compose.yaml down
 ```
 
 ※ `-v` オプションを付けるとデータベースのデータも削除されます
 
 ### Docker を使用しない場合
-
 
 1. リポジトリをクローン
 
@@ -351,7 +350,7 @@ bin/rails db:create db:migrate
 bin/dev
 ```
 
-※ Dockerを使用せずに画像処理（CarrierWave + MiniMagick 等）を使う場合、別途で`ImageMagick` のインストールが必要です（macOS では `brew install imagemagick`）
+※ Docker を使用せずに画像処理（CarrierWave + MiniMagick 等）を使う場合、別途で`ImageMagick` のインストールが必要です（macOS では `brew install imagemagick`）
 
 ---
 

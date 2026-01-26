@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+# =========ローカルと本番切り替え===========
+    command: bundle exec puma -C config/puma.rb -e production
+    # command: bundle exec puma -C config/puma.rb
+# ======================================
+
+    volumes:
+      - .:/devjourney
+      - public-data:/devjourney/public
+      - tmp-data:/devjourney/tmp
+      - log-data:/devjourney/log
+    networks:
+      - devjourney-network
+# =========ローカルと本番切り替え===========
+  #   depends_on:
+  #     - db
+
+  # db:
+  #   image: postgres:14
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: devjourney_development
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   networks:
+  #     - devjourney-network
+# ======================================
+
+  web:
+    build:
+      context: ./nginx_docker
+    volumes:
+      - public-data:/devjourney/public
+      - tmp-data:/devjourney/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    networks:
+      - devjourney-network
+
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
+
+networks:
+  devjourney-network:
+    external: true
