@@ -16,4 +16,10 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch("POSTGRES_DB") { "devjourney_production" } %>
+  database: <%= ENV['DB_DATABASE'] %>
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
