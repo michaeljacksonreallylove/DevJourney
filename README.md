@@ -2,6 +2,8 @@
 
 # DevJourney
 
+サービスURL: [http://100.31.35.91](http://100.31.35.91)
+
 <img width="1029" height="383" alt="Image" src="https://github.com/user-attachments/assets/fd10a706-c00c-4e41-97c9-2fb498f3f3fe" />
 
 DevJourney はプログラミング教材のレビュー共有と、
@@ -288,72 +290,6 @@ erDiagram
 
 ---
 
-## セットアップ（開発環境）
-
-### Docker を使用する場合
-
-1. リポジトリをクローン
-
-```bash
-git clone https://github.com/michaeljacksonreallylove/DevJourney.git
-cd DevJourney
-```
-
-2. Docker イメージをビルドしてコンテナを起動
-
-```bash
-docker compose -f compose.yaml up --build
-```
-
-初回起動時は自動的に以下が実行されます：
-
-- 依存関係のインストール（bundle install, yarn install）
-- データベースの作成・マイグレーション
-
-3. ブラウザでアクセス
-
-http://localhost:3000
-
-4. 停止する場合
-
-```bash
-docker compose -f compose.yaml down
-```
-
-※ `-v` オプションを付けるとデータベースのデータも削除されます
-
-### Docker を使用しない場合
-
-1. リポジトリをクローン
-
-```bash
-git clone https://github.com/michaeljacksonreallylove/DevJourney.git
-cd DevJourney
-```
-
-2. 依存関係をインストール
-
-```bash
-bundle install
-yarn install
-```
-
-3. データベース作成・マイグレート
-
-```bash
-bin/rails db:create db:migrate
-```
-
-4. サーバ起動
-
-```bash
-bin/dev
-```
-
-※ Docker を使用せずに画像処理（CarrierWave + MiniMagick 等）を使う場合、別途で`ImageMagick` のインストールが必要です（macOS では `brew install imagemagick`）
-
----
-
 ## 今後の展望・追加したい主な機能
 
 ### 1. もくもく会一覧の UI/UX 改善
@@ -367,7 +303,3 @@ bin/dev
 ### 3. Zoom SDK(Meeting SDK)を用いて、アプリ自体に Zoom 機能を取り入れる
 
 •Zoom の Meeting SDK を活用し、アプリ内から直接 Zoom ミーティングに参加できる機能を実装する予定です。これにより、もくもく会に参加する際に外部アプリへ移動する必要がなくなり、アプリ内でそのままビデオ通話や画面共有が利用できるようになります。参加ボタンを押すだけで Zoom が立ち上がるため、操作がシンプルになり、よりスムーズにもくもく会に参加できる体験を提供できる見込みです。また、参加人数の表示や参加中の UI などもアプリ内で完結させることで、より一体感のあるサービス体験の実現を目指します。
-
-### 4. AWS に自身のサービスをデプロイする
-
-•AWS にデプロイしてインフラをクラウド化し、安定性や運用しやすさの向上を目指します。
