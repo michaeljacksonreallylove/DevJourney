@@ -21,11 +21,16 @@ test:
   port: <%= ENV.fetch("POSTGRES_TEST_PORT") { 5432 } %>
 
 production:
-  <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
-  adapter: postgresql
-  encoding: unicode
-  host: <%= ENV['DB_HOST'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  primary:
+    <<: *default
+    database: <%= ENV['DB_DATABASE'] %>
+    host: <%= ENV['DB_HOST'] %>
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
 
+  cable:
+    <<: *default
+    database: <%= ENV['DB_DATABASE'] %>
+    host: <%= ENV['DB_HOST'] %>
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
