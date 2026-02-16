@@ -6,7 +6,9 @@
           <%= image_tag mokumoku_session.user.avatar.url, class: "user-avatar" %>
           <div class="user-info">
             <div class="user-name"><%= mokumoku_session.user.name %></div>
-            <div class="user-devjourney-id">@<%= mokumoku_session.user.devjourney_id %></div>
+            <div class="user-devjourney-id" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              @<%= mokumoku_session.user.devjourney_id %>
+            </div>
           </div>
         </a> 
       <% else %> 
